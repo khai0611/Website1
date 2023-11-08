@@ -1,4 +1,6 @@
 ﻿@*
+    ASP.Net MVC has introduced a concept called Layout Page. Using Layout Page, we only need to create content for the header and footer once.
+    If any page wants to use it, we just need to inherit from Layout Page contains header and footer.
     Common template for another pages *@
 
 <!DOCTYPE html>
@@ -40,13 +42,54 @@
 
                 <div class="navbar-collapse collapse" id="navbarContent">
                     <ul class="navbar-nav ml-lg-4 pt-3 pt-lg-0">
-                        <li class="nav-item active">
+                        @* Method 1 *@
+                        @*@if (ViewBag.active == 1)
+                            {
+                                <li class="nav-item active">
+                                    <a href="~/" class="nav-link">Home</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a href="~/" class="nav-link">Home</a>
+                                </li>
+                            }
+
+                            @if (ViewBag.active == 2)
+                            {
+                                <li class="nav-item active">
+                                    <a href="~/About" class="nav-link">About</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a href="~/About" class="nav-link">About</a>
+                                </li>
+                            }
+
+                            @if (ViewBag.active == 3)
+                            {
+                                <li class="nav-item active">
+                                    <a href="~/Service" class="nav-link">Services</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a href="~/Service" class="nav-link">Services</a>
+                                </li>
+                            }*@
+
+                        @* Method 2 *@
+                        <li class="nav-item @Html.Raw(ViewBag.active == 1 ? "active": "")">
                             <a href="~/" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item @Html.Raw(ViewBag.active == 2 ? "active": "")">
                             <a href="~/About" class="nav-link">About</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item @Html.Raw(ViewBag.active == 3 ? "active": "")">
                             <a href="~/Service" class="nav-link">Services</a>
                         </li>
                         <li class="nav-item">
@@ -83,7 +126,10 @@
             </div>
         </div>
     </header>
-
+    @*
+        With the RenderBody property, when we want to display any View, @RenderBody() will return the correct content for that View, it means
+        if we want to display the Home page, @RenderBody() will return the correct content for the Home page and similarly for the About page.
+    *@
     @RenderBody()
 
     <footer class="page-footer">
@@ -96,6 +142,11 @@
                     <p><a href="#">digigram@mail.com</a></p>
                     <p><a href="#">+00 1122 3344 5566</a></p>
                 </div>
+
+                @* This section will change if view is different *@
+                @*@RenderSection("Contact", true);*@
+                @* This section will change if view is different *@
+
                 <div class="col-lg-3 py-3">
                     <h5>Quick Links</h5>
                     <ul class="footer-menu">

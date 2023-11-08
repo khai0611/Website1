@@ -1,11 +1,75 @@
-﻿
+﻿@* We can transmit types like:
+    1. String:
+     ViewBag.title = "Trang chủ";
+    2. Number:
+     ViewBag.title = 1
+    3. List:
+     ViewBag.DanhSachSinhVien = new List<string> {"QK", "IT"}*@
+
+@*@model int*@
+
+@*@model Website3.Models.clsSinhVien*@
+
+@* 5.Declare Model to receive data from view*@
+@model List<Website3.Models.clsSinhVien>
+
+@* Data transmit from View to this model *@
+
 @{
-    Layout = "~/Views/Shared/UserLayout.cshtml";
     ViewBag.title = "Home";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    ViewBag.active = 1;
+
+    //Website3.Models.clsSinhVien sv1 = (Website3.Models.clsSinhVien)ViewBag.sv1;
 }
 
+
+@*@section Meta{
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="copyright" content="MACode ID, https://macodeid.com">
+    }*@
+
+
+@* Transmit to RenderBody *@
 <main>
     <div class="page-section features">
+        Transmit number from Controller to View: A = @ViewBag.A
+        <br />
+        @*Transmit number from Controller to View: A = @Model*@
+        <br />
+        @*Transmit number from Controller to View: A = @Model.HoTen*@
+        <br />
+        @*Transmit number from Controller to View: A = @sv1.Lop*@
+        <br />
+        List of Student
+        <table class=" table table-bordered">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Code</td>
+                    <td>Name</td>
+                    <td>Class</td>
+                </tr>
+            </thead>
+            <tbody>
+                @* 6. Use foreach loop to export data *@
+                @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Code</td>
+                    <td>@item.Name</td>
+                    <td>@item.Class</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4 py-3 wow fadeInUp">
@@ -418,4 +482,15 @@
     </div> <!-- .page-section -->
 </main>
 
+@* Convert to Section *@
 
+
+@*@section Contact{
+        <div class="col-lg-3 py-3">
+            <h3>Digi<span class="text-primary">Gram.</span></h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+            <p><a href="#">digigram@mail.com</a></p>
+            <p><a href="#">+00 1122 3344 5566</a></p>
+        </div>
+    }*@
