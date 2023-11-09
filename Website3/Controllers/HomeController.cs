@@ -43,6 +43,9 @@ namespace Website3.Controllers
 
             //4.transmit list into View
             return View(dsSinhVien);
+
+            
+            
         }
 
         
